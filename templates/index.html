@@ -54,16 +54,19 @@
 
         .suggestions {
             position: absolute;
-            top: 40px;
+            top: 60px; /* Adjusted from 40px to below the status bar */
             left: 0;
             background-color: rgba(255, 255, 255, 1);
             border: 1px solid #ced4da;
             border-radius: 10px;
             width: 100%;
+            max-height: 200px; /* Adjust as needed */
+            overflow-y: auto; /* Enable vertical scrolling */
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-            z-index: 1001;
+            z-index: 1001; /* Ensure it is on top of other content */
             font-size: 0.5em;
             color: #343a40;
+            display: none;
         }
 
         .suggestions div {
@@ -75,7 +78,7 @@
         .suggestions div:hover {
             background-color: #f1f1f1;
         }
-
+    
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -165,13 +168,58 @@
                 transform: translateY(0);
             }
         }
-    </style>
+        </style>
 </head>
 
 <body>
     <div class="status-bar">
         <div>Groupie Trackers</div>
         <div class="search-container">
+            <script>
+                function searchSuggestions() {
+                    const query = document.getElementById('searchBar').value;
+                    const suggestions = document.getElementById('suggestions');
+            
+                    if (query.trim() === ' ') {
+                        suggestions.style.display = 'none'; // Hide suggestions if query is empty
+                        return;
+                    }
+            
+                    fetch(`/search?q=${encodeURIComponent(query)}`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            suggestions.innerHTML = '';
+                            if (data.length > 0) {
+                                data.forEach(item => {
+                                    let div = document.createElement('div');
+                                    div.innerHTML = `${item.name} - ${item.type}`;
+                                    suggestions.appendChild(div);
+                                });
+                                suggestions.style.display = 'block'; // Show suggestions
+                            } else {
+                                suggestions.style.display = 'none'; // Hide suggestions if no data
+                            }
+                        })
+                        .catch(error => {
+                            console.error('There was a problem with the fetch operation:', error);
+                            suggestions.style.display = 'none'; // Hide suggestions on error
+                        });
+                }
+            
+                document.addEventListener('click', function(event) {
+                    const searchBar = document.getElementById('searchBar');
+                    const suggestions = document.getElementById('suggestions');
+            
+                    if (!searchBar.contains(event.target) && !suggestions.contains(event.target)) {
+                        suggestions.style.display = 'none';
+                    }
+                });
+            </script>
             <input type="text" id="searchBar" placeholder="search..." onkeyup="searchSuggestions()">
             <div id="suggestions" class="suggestions"></div>
         </div>
@@ -186,23 +234,6 @@
         </div>
         {{end}}
     </div>
-
-    <script>
-        function searchSuggestions() {
-            const query = document.getElementById('searchBar').value;
-            fetch(`/search?q=${query}`)
-                .then(response => response.json())
-                .then(data => {
-                    let suggestions = document.getElementById('suggestions');
-                    suggestions.innerHTML = '';
-                    data.forEach(item => {
-                        let div = document.createElement('div');
-                        div.innerHTML = `${item.name} - ${item.type}`;
-                        suggestions.appendChild(div);
-                    });
-                });
-        }
-    </script>
 </body>
 
 </html>
