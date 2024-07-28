@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"strings"
 	"sync"
 )
 
@@ -228,4 +229,43 @@ func ArtistPage(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatalf("Failed to execute template: %v", err)
 	}
+}
+
+// SearchHandler handles the search requests
+func SearchHandler(w http.ResponseWriter, r *http.Request) {
+	query := r.URL.Query().Get("q")
+	query = strings.ToLower(query)
+	suggestions := []SearchItem{}
+
+	// Ensure data is fetched
+	once.Do(fetchData)
+
+	for _, artist := range data.Artists {
+		if strings.Contains(strings.ToLower(artist.Name), query) {
+			suggestions = append(suggestions, SearchItem{Name: artist.Name, Type: "artist/band"})
+		}
+		for _, member := range artist.Members {
+			if strings.Contains(strings.ToLower(member), query) {
+				suggestions = append(suggestions, SearchItem{Name: member, Type: "member"})
+				}
+				}
+				if strings.Contains(fmt.Sprintf("%d", artist.CreationDate), query) {
+				suggestions = append(suggestions, SearchItem{Name: fmt.Sprintf("%d", artist.CreationDate), Type: "creation date"})
+				}
+				if strings.Contains(strings.ToLower(artist.FirstAlbum), query) {
+				suggestions = append(suggestions, SearchItem{Name: artist.FirstAlbum, Type: "first album"})
+				}
+				}
+				response, err := json.Marshal(suggestions)
+				if err != nil {
+					http.Error(w, "Failed to marshal response", http.StatusInternalServerError)
+					return
+				}
+				w.Header().Set("Content-Type", "application/json")
+				w.Write(response)
+			}
+			// SearchItem struct to hold search suggestions
+			type SearchItem struct {
+				Name string `json:"name"`
+				Type string `json:"type"`
 }
