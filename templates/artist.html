@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{.Artist.Name}} - Artist Details</title>
+    <link rel="icon" type="image/x-icon" href="{{.Artist.Image}}">
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: url('/assets/img/pxfuel.jpg') no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+        }
+        .status-bar {
+            background-color: rgba(217, 211, 211, 0.9);
+            color: white;
+            padding: 10px;
+            font-size: 2em;
+            font-weight: 600;
+            color: #343a40;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            animation: slideDown 1s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .status-bar .back-button {
+            background-color: #343a40;
+            color: rgba(255, 255, 255);
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            transition: background-color 0.3s ease-in-out;
+            position: absolute;
+            left: 10px;
+            top: 6px;
+        }
+        .status-bar .back-button:hover {
+            transform: scale(1.05);
+        }
+        .status-bar .title {
+            text-align: center;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #343a40;
+            animation: fadeIn 2s ease-in-out;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+        h2 {
+            font-size: 2em;
+            margin-top: 20px;
+            text-align: left;
+            padding-left: 10px;
+            animation: fadeIn 2s ease-in-out 0.5s both; /* Added delay for h2 elements */
+        }
+        .artist-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin-top: 80px; /* Added margin to offset the fixed status bar */
+            animation: slideIn 1.5s ease-in-out;
+            width: 100%;
+        }
+        .artist-info .header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .artist-info img {
+            max-width: 150px;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+        .artist-info .details {
+            display: flex;
+            flex-direction: column;
+            width: 100%; /* Ensure full width of parent container */
+        }
+        .artist-info .header h1 {
+            margin: 0;
+        }
+        .artist-info .details p {
+            margin: 10px 0; /* Consistent vertical margin */
+            padding: 10px; /* Consistent padding */
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 100%; /* Full width of the parent container */
+            box-sizing: border-box; /* Includes padding and border in element's total width and height */
+            animation: fadeIn 1.5s ease-in-out 0.5s both; /* Added fade-in animation */
+        }
+        .details-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            animation: fadeIn 1.5s ease-in-out 1s both; /* Added fade-in animation for container */
+        }
+        .details-container .section {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 101.25%;
+            animation: slideIn 1.5s ease-in-out; /* Added slide-in animation for sections */
+        }
+        .details-container .section h2 {
+            margin: 0;
+            font-size: 1.8em;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #343a40;
+        }
+        .details-container .section .item {
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            animation: fadeIn 1.5s ease-in-out; /* Added fade-in animation for items */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(100px); }
+            to { transform: translateY(0); }
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <a href="/" class="back-button">Back</a>
+        <div class="title">Artist - {{.Artist.Name}}</div>
+    </div>
+    <div class="artist-info">
+        <div class="header">
+            <img src="{{.Artist.Image}}" alt="{{.Artist.Name}}" />
+            <h1>{{.Artist.Name}}</h1>
+        </div>
+        <div class="details">
+            <p><strong>Members:</strong> {{range .Artist.Members}}{{.}}, {{end}}</p>
+            <p><strong>Creation Date:</strong> {{.Artist.CreationDate}}</p>
+            <p><strong>First Album:</strong> {{.Artist.FirstAlbum}}</p>
+        </div>
+    </div>
+    <div class="details-container">
+        <div class="section">
+            <h2>Concert Dates</h2>
+            {{range .Dates}}
+            <div class="item">{{.}}</div>
+            {{end}}
+        </div>
+        <div class="section">
+            <h2>Concert Locations</h2>
+            {{range .Locations}}
+            <div class="item">{{.}}</div>
+            {{end}}
+        </div>
+    </div>
+</body>
+</html>

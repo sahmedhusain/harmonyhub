@@ -1,0 +1,10 @@
+error page setup
+
+error server handler
+
+css
+
+update readme
+
+add notes for code
+
