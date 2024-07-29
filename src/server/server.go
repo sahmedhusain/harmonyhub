@@ -165,19 +165,11 @@ func HomePage(w http.ResponseWriter, r *http.Request) {
 
 	once.Do(fetchData)
 
-	tmpl, err := template.ParseFiles("templates/index.html")
-	if err != nil {
-		log.Fatalf("Failed to parse template: %v", err)
-	}
-
-	err = tmpl.Execute(w, data.Artists)
+	// Execute the template with the fetched data
+	err = main.Execute(w, data.Artists)
 	if err != nil {
 		log.Fatalf("Failed to execute template: %v", err)
 	}
-	// Ensure the main template is parsed successfully
-	mainTemp := template.Must(main, nil)
-	mainTemp.Execute(w, nil) // Execute the template without any data
-
 }
 
 // Handler for artist details page
