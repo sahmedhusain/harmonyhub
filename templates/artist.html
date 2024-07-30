@@ -20,22 +20,21 @@
             <h1>{{.Artist.Name}}</h1>
         </div>
         <div class="details">
-            <p><strong>Members:</strong> {{range .Artist.Members}}{{.}}, {{end}}</p>
+            <p><strong>Members:</strong> {{.Members}}</p>
             <p><strong>Creation Date:</strong> {{.Artist.CreationDate}}</p>
             <p><strong>First Album:</strong> {{.Artist.FirstAlbum}}</p>
         </div>
     </div>
     <div class="details-container">
         <div class="section">
-            <h2>Concert Dates</h2>
-            {{range .Dates}}
-            <div class="item">{{.}}</div>
-            {{end}}
-        </div>
-        <div class="section">
-            <h2>Concert Locations</h2>
-            {{range .Locations}}
-            <div class="item">{{.}}</div>
+            <h2>Concert Location & Dates</h2>
+            {{range $location, $dates := .LinkedConcerts}}
+            <div class="item">
+                <strong>{{$location}}:</strong>
+                {{range $dates}}
+                <div>{{.}}</div>
+                {{end}}
+            </div>
             {{end}}
         </div>
     </div>

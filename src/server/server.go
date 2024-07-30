@@ -138,6 +138,13 @@ func fetchData() {
 	}
 }
 
+// remove unwanted strings
+func clean(s string) string {
+	s = strings.ReplaceAll(s, "*", "")
+	s = strings.ReplaceAll(s, "_", " ")
+	return s
+}
+
 // Handler for the home page
 func HomePage(w http.ResponseWriter, r *http.Request) {
 	// Validating the request path
@@ -212,11 +219,33 @@ func ArtistPage(w http.ResponseWriter, r *http.Request) {
 	// Add concert dates and locations to the artist
 	artistConcertDates := data.Dates[artist.ID]
 	artistConcertLocations := data.Locations[artist.ID]
+	//apply the clean func on locations & dates
+	for i, loc := range artistConcertLocations {
+		artistConcertLocations[i] = clean(loc)
+	}
 
+	for i, date := range artistConcertDates {
+		artistConcertDates[i] = clean(date)
+	}
+
+	// link concert dates with concert location
+	linkedConcerts := make(map[string][]string)
+	for location, dates := range data.Relations[artist.ID].DatesLocations {
+		for _, date := range dates {
+			linkedConcerts[clean(location)] = append(linkedConcerts[clean(location)], clean(date))
+		}
+	}
+
+	// Format members string
+	cleanedMembers := make([]string, len(artist.Members))
+	for i, member := range artist.Members {
+		cleanedMembers[i] = clean(strings.TrimSpace(member))
+	}
+	members := strings.Join(cleanedMembers, ", ")
 	err = pg.Execute(w, map[string]interface{}{
-		"Artist":    artist,
-		"Dates":     artistConcertDates,
-		"Locations": artistConcertLocations,
+		"Artist":         artist,
+		"Members":        members,
+		"LinkedConcerts": linkedConcerts,
 	})
 	if err != nil {
 		log.Fatalf("Failed to execute template: %v", err)
@@ -239,25 +268,26 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 		for _, member := range artist.Members {
 			if strings.Contains(strings.ToLower(member), query) {
 				suggestions = append(suggestions, SearchItem{Name: member, Type: "member"})
-				}
-				}
-				if strings.Contains(fmt.Sprintf("%d", artist.CreationDate), query) {
-				suggestions = append(suggestions, SearchItem{Name: fmt.Sprintf("%d", artist.CreationDate), Type: "creation date"})
-				}
-				if strings.Contains(strings.ToLower(artist.FirstAlbum), query) {
-				suggestions = append(suggestions, SearchItem{Name: artist.FirstAlbum, Type: "first album"})
-				}
-				}
-				response, err := json.Marshal(suggestions)
-				if err != nil {
-					http.Error(w, "Failed to marshal response", http.StatusInternalServerError)
-					return
-				}
-				w.Header().Set("Content-Type", "application/json")
-				w.Write(response)
 			}
-			// SearchItem struct to hold search suggestions
-			type SearchItem struct {
-				Name string `json:"name"`
-				Type string `json:"type"`
+		}
+		if strings.Contains(fmt.Sprintf("%d", artist.CreationDate), query) {
+			suggestions = append(suggestions, SearchItem{Name: fmt.Sprintf("%d", artist.CreationDate), Type: "creation date"})
+		}
+		if strings.Contains(strings.ToLower(artist.FirstAlbum), query) {
+			suggestions = append(suggestions, SearchItem{Name: artist.FirstAlbum, Type: "first album"})
+		}
+	}
+	response, err := json.Marshal(suggestions)
+	if err != nil {
+		http.Error(w, "Failed to marshal response", http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(response)
+}
+
+// SearchItem struct to hold search suggestions
+type SearchItem struct {
+	Name string `json:"name"`
+	Type string `json:"type"`
 }
