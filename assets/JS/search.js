@@ -2,7 +2,7 @@ function searchSuggestions() {
     const query = document.getElementById('searchBar').value;
     const suggestions = document.getElementById('suggestions');
 
-    if (query.trim() === ' ') {
+    if (query.trim() === '') {
         suggestions.style.display = 'none'; // Hide suggestions if query is empty
         return;
     }
@@ -20,6 +20,11 @@ function searchSuggestions() {
                 data.forEach(item => {
                     let div = document.createElement('div');
                     div.innerHTML = `${item.name} - ${item.type}`;
+                    div.dataset.id = item.id; // Store the artist ID in a data attribute
+                    div.classList.add('suggestion');
+                    div.addEventListener('click', function () {
+                        window.location.href = `/artist?id=${item.id}`; // Redirect to the artist page
+                    });
                     suggestions.appendChild(div);
                 });
                 suggestions.style.display = 'block'; // Show suggestions
@@ -33,6 +38,7 @@ function searchSuggestions() {
         });
 }
 
+// Handle click event on suggestions
 document.addEventListener('click', function (event) {
     const searchBar = document.getElementById('searchBar');
     const suggestions = document.getElementById('suggestions');

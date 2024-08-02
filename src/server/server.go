@@ -263,18 +263,18 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 
 	for _, artist := range data.Artists {
 		if strings.Contains(strings.ToLower(artist.Name), query) {
-			suggestions = append(suggestions, SearchItem{Name: artist.Name, Type: "artist/band"})
+			suggestions = append(suggestions, SearchItem{Name: artist.Name, Type: "artist/band", ID: artist.ID})
 		}
 		for _, member := range artist.Members {
 			if strings.Contains(strings.ToLower(member), query) {
-				suggestions = append(suggestions, SearchItem{Name: member, Type: "member"})
+				suggestions = append(suggestions, SearchItem{Name: member, Type: "member", ID: artist.ID})
 			}
 		}
 		if strings.Contains(fmt.Sprintf("%d", artist.CreationDate), query) {
-			suggestions = append(suggestions, SearchItem{Name: fmt.Sprintf("%d", artist.CreationDate), Type: "creation date"})
+			suggestions = append(suggestions, SearchItem{Name: fmt.Sprintf("%d", artist.CreationDate), Type: "creation date", ID: artist.ID})
 		}
 		if strings.Contains(strings.ToLower(artist.FirstAlbum), query) {
-			suggestions = append(suggestions, SearchItem{Name: artist.FirstAlbum, Type: "first album"})
+			suggestions = append(suggestions, SearchItem{Name: artist.FirstAlbum, Type: "first album", ID: artist.ID})
 		}
 	}
 	response, err := json.Marshal(suggestions)
@@ -290,4 +290,5 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 type SearchItem struct {
 	Name string `json:"name"`
 	Type string `json:"type"`
+	ID   int    `json:"id"`
 }
