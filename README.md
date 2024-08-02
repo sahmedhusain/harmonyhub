@@ -1,4 +1,4 @@
-# Groupie-Tracker
+# Groupie Tracker Search Bar
 
 Groupie-Tracker is a web application that I developed to provide detailed information about various artists and bands, including their members, concert dates, and locations. The application fetches data from a given API and presents it in a user-friendly format.
 
@@ -68,6 +68,39 @@ Extensible and Scalable
 
 The application is designed to be extensible, allowing for the easy addition of new features and improvements. The flexible nature of Go’s web framework enables further enhancements.
 
+### CSS
+
+Style sheets implemented for each page includes:
+
+- Strive for consistency
+- Enable frequent users to use shortcuts
+- Offer informative feedback
+- Design dialogue to yield closure
+- Offer simple error handling
+- Permit easy reversal of actions
+- Support internal locus of control
+- Reduce short-term memory load
+
+## Search Bar
+
+Groupie tracker search bar consists of creating a functional program that searches, inside our website, for a specific text input.
+
+- The program can handle these search cases :
+  - artist/band name
+  - members
+  - locations
+  - first album date
+  - creation date
+
+- The program can handle search input as case-insensitive.
+
+- The search bar has typing suggestions as you write.
+
+- The search bar can identify and display in each suggestion the individual type of the search cases. (ex: Freddie Mercury -> member)
+
+  - For example if you start writing "phil" it should appear as suggestions Phil Collins - member and Phil Collins - artist/band. 
+  This is just an example of a display.
+
 ## Authors
 
 	•	Ali Alqaed
@@ -83,4 +116,3 @@ To see an example of the RESTful API used in this project, you can visit [Groupi
 	•	JSON files and format.
 	•	HTML.
 	•	Event creation and display.
-	•	Client-server communication.
