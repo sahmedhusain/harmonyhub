@@ -160,7 +160,7 @@ h2 {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
-    align-items: center;
+    flex-direction: column;
     animation: fadeIn 1.5s ease-in-out;
     /* Added fade-in animation for items */
 }
