@@ -3,30 +3,48 @@
 
 <head>
     <meta charset="UTF-8">
+    <!-- Sets character encoding to UTF-8 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Sets the viewport to make the website responsive -->
     <title>Groupie Trackers</title>
+    <!-- Sets the title of the webpage -->
     <link rel="icon" type="image/x-icon" href="/assets/img/istockphoto-941632502-612x612.jpg">
+    <!-- Links to the favicon for the webpage -->
     <link rel="stylesheet" href="/assets/CSS/styles1.css">
+    <!-- Links to the external CSS file for styling -->
     <script src="/assets/JS/search.js"></script>
+    <!-- Links to the external JavaScript file for search functionality -->
 </head>
 
 <body>
     <div class="status-bar">
+        <!-- Status bar container -->
         <div>Groupie Trackers</div>
+        <!-- Title within the status bar -->
         <div class="search-container">
+            <!-- Container for search bar -->
             <input type="text" id="searchBar" placeholder="search..." onkeyup="searchSuggestions()">
+            <!-- Search input field with onkeyup event to trigger searchSuggestions function -->
             <div id="suggestions" class="suggestions"></div>
+            <!-- Container to display search suggestions -->
         </div>
     </div>
     <div class="grid-container">
+        <!-- Container for grid items -->
         {{range .}}
+        <!-- Go template to iterate over items -->
         <div class="grid-item">
+            <!-- Single grid item -->
             <a href="/artist?id={{.ID}}">
+                <!-- Link to artist's page using their ID -->
                 <img src="{{.Image}}" alt="{{.Name}}">
+                <!-- Image of the artist -->
                 <h2>{{.Name}}</h2>
+                <!-- Name of the artist -->
             </a>
         </div>
         {{end}}
+        <!-- End of the range loop -->
     </div>
 </body>
 
