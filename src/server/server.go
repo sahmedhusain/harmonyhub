@@ -276,7 +276,15 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 		if strings.Contains(strings.ToLower(artist.FirstAlbum), query) {
 			suggestions = append(suggestions, SearchItem{Name: artist.FirstAlbum, Type: "first album", ID: artist.ID})
 		}
+
+		// Search in concert locations
+		for _, location := range data.Locations[artist.ID] {
+			if strings.Contains(strings.ToLower(location), query) {
+				suggestions = append(suggestions, SearchItem{Name: location, Type: "location", ID: artist.ID})
+			}
+		}
 	}
+
 	response, err := json.Marshal(suggestions)
 	if err != nil {
 		http.Error(w, "Failed to marshal response", http.StatusInternalServerError)
