@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	server "groupie-tracker/src/server"
+	server "harmonyhub/src/server"
 	"log"
 	"net/http"
 )
