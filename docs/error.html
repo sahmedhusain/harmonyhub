@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <!-- Sets character encoding to UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Sets the viewport to make the website responsive -->
+    <title>Harmony Hub - Error</title>
+    <!-- Sets the title of the error page -->
+    <link rel="icon" type="image/x-icon" href="assets/img/error-icon-25243.png">
+    <!-- Links to the favicon for the error page -->
+    <link rel="stylesheet" href="assets/CSS/styles3.css">
+    <!-- Links to the external CSS file for error page styling -->
+</head>
+
+<body>
+    <div class="status-bar">
+        <!-- Status bar container -->
+        <a href="/" class="back-button">Back</a>
+        <!-- Back button to navigate to the homepage -->
+        <div class="title">Error</div>
+        <!-- Title within the status bar -->
+    </div>
+    <div class="error-container">
+        <!-- Container for error content -->
+        <img src="/assets/img/error.png" alt="Error Image" />
+        <!-- Error image -->
+        <h1>{{.Code}}</h1>
+        <!-- Error code -->
+        <p>{{.ErrorMsg}}</p>
+        <!-- Error message -->
+    </div>
+</body>
+
+</html>
