@@ -255,5 +255,3 @@ Developed as part of a Go learning journey with a focus on API integration and w
 - Clean typography for readability
 - Consistent card-based UI design
 - Live search feedback with instant suggestions
-
-> Visual assets (banners, GIFs, and diagrams) are intentionally lightweight to keep performance high while improving presentation.
