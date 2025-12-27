@@ -6,11 +6,6 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat&logo=javascript)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.md)
 
-<!-- 🎵 Animated Header -->
-<p align="center">
-  <img src="assets/img/harmonyhub-banner.gif" alt="HarmonyHub Animated Banner" width="900"/>
-</p>
-
 <p align="center">
   <strong>Discover artists. Track concerts. Explore music data.</strong><br/>
   <em>A clean Go-powered music discovery experience.</em>
@@ -140,10 +135,6 @@ Data is visualized using cards, tables, and dynamic UI components rendered throu
 
 ## 📸 Screenshots
 
-<p align="center">
-  <img src="assets/img/harmonyhub-preview.gif" alt="HarmonyHub Live Preview" width="850"/>
-</p>
-
 ### Home Page
 ![Home Page](assets/img/home_screenshot.jpeg)  
 _Browse artists and access the smart search._
@@ -162,7 +153,19 @@ _Live search suggestions and filtered results._
 
 <!-- 🏗️ Architecture Overview -->
 <p align="center">
-  <img src="assets/img/harmonyhub-architecture.png" alt="HarmonyHub Architecture Diagram" width="750"/>
+```mermaid
+graph TD;
+    User[👤 User] --> Browser[🌐 Browser<br/>HTML/CSS/JS];
+    Browser --> Server[🐹 Go Server<br/>Routing & Data Processing];
+    Server --> API[🔄 REST API<br/>External Data Source];
+    API --> Server;
+    Server --> Templates[📄 Templates<br/>Dynamic Views];
+    Templates --> Browser;
+    Server --> Handlers[⚙️ Handlers<br/>Page Rendering];
+    Server --> ErrorManagement[🛡️ Error Management<br/>Stability & Feedback];
+    Browser --> Styling[🎨 Styling<br/>Responsive Layout];
+    Browser --> JavaScript[⚡ JavaScript<br/>Live Search & Interactions];
+```
 </p>
 
 ### Data Handling
