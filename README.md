@@ -57,11 +57,11 @@ HarmonyHub provides the following core functionality:
 
 HarmonyHub is built using the following technologies:
 
-- **Go** 🐹 – Backend server, routing, and data processing  
-- **HTML** 🌐 – Page structure and templating  
-- **CSS** 🎨 – Responsive styling and layout  
-- **JavaScript** ⚙️ – Interactive search and client-side behavior  
-- **REST API** 🔄 – External data source for artists and concerts  
+- **Go** 🐹 – Backend server, routing, and data processing
+- **HTML** 🌐 – Page structure and templating
+- **CSS** 🎨 – Responsive styling and layout
+- **JavaScript** ⚙️ – Interactive search and client-side behavior
+- **REST API** 🔄 – External data source for artists and concerts
 
 <!-- 🧩 Technology Logos -->
 <p align="center">
@@ -72,6 +72,7 @@ HarmonyHub is built using the following technologies:
 </p>
 
 ---
+
 ---
 
 ## 🎯 Project Objective
@@ -80,10 +81,10 @@ HarmonyHub processes structured data from an external API to create an intuitive
 
 ### Core Data Entities
 
-1. **Artists** 📸 – Names, images, formation years, first albums, and members  
-2. **Locations** 📍 – Concert venues and cities  
-3. **Dates** 📅 – Performance schedules  
-4. **Relations** 🔗 – Connections between artists, dates, and locations  
+1. **Artists** 📸 – Names, images, formation years, first albums, and members
+2. **Locations** 📍 – Concert venues and cities
+3. **Dates** 📅 – Performance schedules
+4. **Relations** 🔗 – Connections between artists, dates, and locations
 
 Data is visualized using cards, tables, and dynamic UI components rendered through server-side templates.
 
@@ -98,16 +99,19 @@ Data is visualized using cards, tables, and dynamic UI components rendered throu
 ### Installation & Setup
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/sahmedhusain/harmonyhub.git
    ```
 
 2. Navigate to the project directory:
+
    ```bash
    cd harmonyhub
    ```
 
 3. Run the application:
+
    ```bash
    go run main.go
    ```
@@ -128,22 +132,25 @@ Data is visualized using cards, tables, and dynamic UI components rendered throu
 ### Search Examples
 
 - Typing **"phil"** may return suggestions such as:
-  - *Phil Collins – member*
-  - *Phil Collins – artist/band*
+  - _Phil Collins – member_
+  - _Phil Collins – artist/band_
 
 ---
 
 ## 📸 Screenshots
 
 ### Home Page
+
 ![Home Page](assets/img/home_screenshot.jpeg)  
 _Browse artists and access the smart search._
 
 ### Artist Details
+
 ![Artist Details](assets/img/SOJA-ArtistDetails.jpeg)  
 _View band history and concert information._
 
 ### Search Results
+
 ![Search Results](assets/img/Harmonysearch.jpeg)  
 _Live search suggestions and filtered results._
 
@@ -155,16 +162,16 @@ _Live search suggestions and filtered results._
 <p align="center">
 ```mermaid
 graph TD;
-    User[👤 User] --> Browser[🌐 Browser<br/>HTML/CSS/JS];
-    Browser --> Server[🐹 Go Server<br/>Routing & Data Processing];
-    Server --> API[🔄 REST API<br/>External Data Source];
+    User["👤 User"] --> Browser["🌐 Browser\nHTML/CSS/JS"];
+    Browser --> Server["🐹 Go Server\nRouting & Data Processing"];
+    Server --> API["🔄 REST API\nExternal Data Source"];
     API --> Server;
-    Server --> Templates[📄 Templates<br/>Dynamic Views];
+    Server --> Templates["📄 Templates\nDynamic Views"];
     Templates --> Browser;
-    Server --> Handlers[⚙️ Handlers<br/>Page Rendering];
-    Server --> ErrorManagement[🛡️ Error Management<br/>Stability & Feedback];
-    Browser --> Styling[🎨 Styling<br/>Responsive Layout];
-    Browser --> JavaScript[⚡ JavaScript<br/>Live Search & Interactions];
+    Server --> Handlers["⚙️ Handlers\nPage Rendering"];
+    Server --> ErrorManagement["🛡️ Error Management\nStability & Feedback"];
+    Browser --> Styling["🎨 Styling\nResponsive Layout"];
+    Browser --> JavaScript["⚡ JavaScript\nLive Search & Interactions"];
 ```
 </p>
 
@@ -175,14 +182,14 @@ graph TD;
 
 ### Server-Side
 
-- **Handlers** – Manage routing and page rendering  
-- **Templates** – HTML templates for dynamic views  
-- **Error Management** – Ensures stability and clear feedback  
+- **Handlers** – Manage routing and page rendering
+- **Templates** – HTML templates for dynamic views
+- **Error Management** – Ensures stability and clear feedback
 
 ### Front-End
 
-- **Styling** – Consistent, responsive layout  
-- **JavaScript** – Powers live search and suggestions  
+- **Styling** – Consistent, responsive layout
+- **JavaScript** – Powers live search and suggestions
 
 The architecture is designed for scalability and easy feature expansion.
 
@@ -192,15 +199,16 @@ The architecture is designed for scalability and easy feature expansion.
 
 The search functionality supports:
 
-- Artist and band names  
-- Band members  
-- Concert locations  
-- Album release dates and creation years  
+- Artist and band names
+- Band members
+- Concert locations
+- Album release dates and creation years
 
 Additional behavior:
+
 - Case-insensitive input
 - Live suggestions while typing
-- Clear labeling for each result (e.g., *"Freddie Mercury – member"*)
+- Clear labeling for each result (e.g., _"Freddie Mercury – member"_)
 
 ---
 
@@ -224,7 +232,7 @@ Developed as part of a Go learning journey with a focus on API integration and w
 
 ## 👥 Authors
 
-- **Ali Alqaed**  
+- **Ali Alqaed**
 - **Sayed Ahmed Husain** – [sayedahmed97.sad@gmail.com](mailto:sayedahmed97.sad@gmail.com)
 
 ---
@@ -238,18 +246,18 @@ Developed as part of a Go learning journey with a focus on API integration and w
 
 ## 📚 What I Learned
 
-- Structuring and handling API-driven data  
-- Working with JSON in Go  
-- Server-side rendering using templates  
-- Building interactive web interfaces  
+- Structuring and handling API-driven data
+- Working with JSON in Go
+- Server-side rendering using templates
+- Building interactive web interfaces
 
 ---
 
 ## ✨ Visual & UX Highlights
 
-- Smooth page transitions and responsive layout  
-- Clean typography for readability  
-- Consistent card-based UI design  
-- Live search feedback with instant suggestions  
+- Smooth page transitions and responsive layout
+- Clean typography for readability
+- Consistent card-based UI design
+- Live search feedback with instant suggestions
 
 > Visual assets (banners, GIFs, and diagrams) are intentionally lightweight to keep performance high while improving presentation.
