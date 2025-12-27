@@ -159,7 +159,6 @@ _Live search suggestions and filtered results._
 ## 🛠️ Application Architecture
 
 <!-- 🏗️ Architecture Overview -->
-<p align="center">
 ```mermaid
 flowchart TD
     User[User] --> Browser[Browser]
@@ -171,7 +170,6 @@ flowchart TD
     Server --> Handlers[Handlers]
     Server --> ErrorManagement[Error Management]
 ```
-</p>
 
 ### Data Handling
 
