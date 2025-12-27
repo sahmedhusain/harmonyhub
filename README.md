@@ -161,15 +161,15 @@ _Live search suggestions and filtered results._
 <!-- 🏗️ Architecture Overview -->
 <p align="center">
 ```mermaid
-graph TD
-    User["👤 User"] --> Browser["🌐 Browser\nHTML/CSS/JS"]
-    Browser --> Server["🐹 Go Server\nRouting & Data Processing"]
-    Server --> API["🔄 REST API\nExternal Data Source"]
+flowchart TD
+    User[User] --> Browser[Browser]
+    Browser --> Server[Go Server]
+    Server --> API[REST API]
     API --> Server
-    Server --> Templates["📄 Templates\nDynamic Views"]
+    Server --> Templates[Templates]
     Templates --> Browser
-    Server --> Handlers["⚙️ Handlers\nPage Rendering"]
-    Server --> ErrorManagement["🛡️ Error Management\nStability & Feedback"]
+    Server --> Handlers[Handlers]
+    Server --> ErrorManagement[Error Management]
 ```
 </p>
 
